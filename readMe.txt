@@ -1,1 +1,1 @@
-Heelo, gays!
+Hello, guys!
