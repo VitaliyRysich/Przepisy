@@ -3,6 +3,9 @@ language: java
 jdk:
   - oraclejdk8
 
+  notifications:
+  slack:
+    on_failure: never
 
 #before_install:
 # - cd java
