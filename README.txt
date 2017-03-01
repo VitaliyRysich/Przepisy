@@ -1,0 +1,1 @@
+https://travis-ci.com/dmytro-martyniuk/ZPI.svg?token=4pc9d4wskdPDTEf18AkM&branch=master
