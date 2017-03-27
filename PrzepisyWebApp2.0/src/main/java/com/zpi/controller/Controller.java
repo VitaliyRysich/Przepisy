@@ -1,13 +1,17 @@
 package com.zpi.controller;
 
 import com.zpi.entity.Danie;
+import com.zpi.entity.Typ;
 import com.zpi.service.DanieService;
+import com.zpi.service.TypService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 /**
  * Created by dima on 3/24/17.
@@ -17,6 +21,9 @@ public class Controller {
 
     @Autowired
     private DanieService danieService;
+
+    @Autowired
+    private TypService typService;
 
     @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(value = "/list",method = RequestMethod.GET)
@@ -37,6 +44,13 @@ public class Controller {
     public ResponseEntity<List<Danie>> getDanieByName(@PathVariable("name1") String name) {
         List<Danie> listDanieName = danieService.getDanieByName(name);
         return new ResponseEntity<List<Danie>>(listDanieName, HttpStatus.OK);
+    }
 
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping(value = "/typ",method = RequestMethod.GET)
+    public ResponseEntity<List<Typ>> getAllTyp() {
+        List<Typ> listTyp = typService.getAllTyp();
+        return new ResponseEntity<List<Typ>>(listTyp,HttpStatus.OK);
     }
 }
