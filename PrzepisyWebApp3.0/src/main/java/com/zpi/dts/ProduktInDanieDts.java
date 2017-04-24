@@ -44,6 +44,7 @@ public class ProduktInDanieDts {
     }
 
     public void setIlosc(String ilosc) {
+
         this.ilosc = ilosc;
     }
 
