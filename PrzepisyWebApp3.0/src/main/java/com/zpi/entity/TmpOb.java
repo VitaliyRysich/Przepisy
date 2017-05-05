@@ -7,7 +7,7 @@ public class TmpOb {
     int a;
     int c;
 
-    String test;
-    
+    String test="dsd";
+    String papa;
 
 }
