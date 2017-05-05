@@ -8,6 +8,6 @@ public class TmpOb {
     int c;
 
     String test="dsd";
-    String papa;
+    String papa="mama";
 
 }
