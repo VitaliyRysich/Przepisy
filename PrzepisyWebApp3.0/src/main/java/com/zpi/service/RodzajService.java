@@ -1,5 +1,6 @@
 package com.zpi.service;
 
+import com.zpi.dts.RodzajProduktyDts;
 import com.zpi.entity.Rodzaj;
 import org.springframework.stereotype.Service;
 
@@ -12,4 +13,5 @@ import java.util.List;
 public interface RodzajService {
 
     List<Rodzaj> getAllRodzaj();
+    List<RodzajProduktyDts> getAllProduktyDts();
 }

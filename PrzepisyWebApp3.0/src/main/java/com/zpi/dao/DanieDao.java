@@ -14,6 +14,8 @@ public interface DanieDao {
 
     List<Danie> getAllDanie();
     Danie getDanieById(long id);
-    public Danie getDanieById2(long id);
+    Danie getDanieById2(long id);
     List<Danie> getDanieByName(String name);
+    List<Danie> getDanieByTyp(String typ);
+
 }

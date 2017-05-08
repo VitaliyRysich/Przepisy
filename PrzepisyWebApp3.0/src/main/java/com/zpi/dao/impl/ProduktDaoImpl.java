@@ -8,6 +8,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * Created by Vitalii on 31.03.2017.
  */
@@ -25,4 +27,27 @@ public class ProduktDaoImpl implements ProduktDao {
         session.close();
         return userDetails;
     }
+
+    @Override
+    public Produkt getProduktByName(String name) {
+        Session session =sessionFactory.openSession();
+        Query query=session.createQuery("from com.zpi.entity.Produkt where  nazwa_produkt= :name");
+        query.setString("name",name);
+        Produkt userDetails = (Produkt) query.uniqueResult();
+
+        session.close();
+        return userDetails;
+    }
+
+    @Override
+    public List<Produkt> getProduktsByRodzaj(long id) {
+        Session session = sessionFactory.openSession();
+        Query query=session.createQuery("from com.zpi.entity.Produkt where idRodzaj= :id");
+        query.setLong("id",id);
+        List list=query.list();
+        session.close();
+        return list;
+    }
+
+
 }
