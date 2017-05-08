@@ -25,4 +25,17 @@ public class ProduktDaoImpl implements ProduktDao {
         session.close();
         return userDetails;
     }
+
+    @Override
+    public Produkt getProduktByName(String name) {
+        Session session =sessionFactory.openSession();
+        Query query=session.createQuery("from com.zpi.entity.Produkt where  nazwa_produkt= :name");
+        query.setString("name",name);
+        Produkt userDetails = (Produkt) query.uniqueResult();
+
+        session.close();
+        return userDetails;
+    }
+
+
 }

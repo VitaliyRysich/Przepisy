@@ -1,7 +1,9 @@
 package com.zpi.controller;
 
 import com.zpi.assembler.ProduktInDanieAssembler;
+import com.zpi.dao.ProduktDao;
 import com.zpi.dts.ProduktInDanieDts;
+import com.zpi.entity.Produkt;
 import com.zpi.entity.Zawiera;
 import com.zpi.service.ZawieraService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,9 @@ public class ProduktInDanieSearchController {
     @Autowired
     private ProduktInDanieAssembler produktInDanieAssembler;
 
+    @Autowired
+    private ProduktDao produktDao;
+
     /**
      * Zwraca wszystkie produkty w daniu
      * według id dania
@@ -36,5 +41,13 @@ public class ProduktInDanieSearchController {
         List<Zawiera> listZawiera = zawieraService.getAllZawieraByIdDanie(id);
         List<ProduktInDanieDts> listProd= produktInDanieAssembler.toProduktInDanieDtsList(listZawiera);
         return new ResponseEntity<List<ProduktInDanieDts>>(listProd , HttpStatus.OK);
+    }
+
+
+    //@CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping(value = "/prod/{name}",method = RequestMethod.GET)
+    public ResponseEntity<Produkt> getIdByName(@PathVariable("name") String name) {
+        Produkt produkt = produktDao.getProduktByName(name);
+        return new ResponseEntity<Produkt>(produkt , HttpStatus.OK);
     }
 }

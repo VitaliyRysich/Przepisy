@@ -26,5 +26,10 @@ public class TypServiceImpl implements TypService {
         return typDao.getTypById(id);
     }
 
+    @Override
+    public List<Typ> getIdByNazwa(String nazwa) {
+        return typDao.getIdByNazwa(nazwa);
+    }
+
 
 }

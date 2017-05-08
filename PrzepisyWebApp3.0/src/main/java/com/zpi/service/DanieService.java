@@ -1,5 +1,7 @@
 package com.zpi.service;
 
+import com.zpi.dto.ReqOb;
+import com.zpi.dts.AdvDanieDts;
 import com.zpi.entity.Danie;
 
 import java.util.List;
@@ -12,5 +14,8 @@ public interface DanieService {
     Danie getDanieById(long id);
     Danie getDanieById2(long id);
     List<Danie> getDanieByName(String name);
+    List<Danie> getDanieByTyp(String typ);
+
+    List<AdvDanieDts> getSortDanie (ReqOb reqOb);
 
 }

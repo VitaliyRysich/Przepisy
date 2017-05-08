@@ -67,4 +67,10 @@ public class Produkt {
     public void setDanieList(List<Danie> danieList) {
         this.danieList = danieList;
     }*/
+
+    @Override
+    public String toString() {
+        return
+                " nazwaProdukt " + nazwaProdukt ;
+    }
 }

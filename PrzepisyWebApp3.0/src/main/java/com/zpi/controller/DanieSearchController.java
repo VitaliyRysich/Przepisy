@@ -1,20 +1,18 @@
 package com.zpi.controller;
 
 import com.zpi.assembler.DanieAssembler;
-import com.zpi.assembler.ProduktInDanieAssembler;
+import com.zpi.dao.ProduktDao;
+import com.zpi.dao.ZawieraDao;
 import com.zpi.dto.DanieDto;
 import com.zpi.dto.PrzepisDto;
+import com.zpi.dto.ReqOb;
 import com.zpi.dto.TypDto;
+import com.zpi.dts.AdvDanieDts;
 import com.zpi.dts.DanieDts;
-import com.zpi.dts.ProduktInDanieDts;
 import com.zpi.entity.Danie;
-import com.zpi.entity.Rodzaj;
-import com.zpi.entity.Typ;
-import com.zpi.entity.Zawiera;
 import com.zpi.mapper.DanieMapper;
 import com.zpi.mapper.PrzepisMapper;
 import com.zpi.mapper.TypMapper;
-import com.zpi.mapper.impl.DanieMapperImpl;
 import com.zpi.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,6 +44,12 @@ public class DanieSearchController {
     private DanieAssembler danieAssembler;
     @Autowired
     private PrzepisMapper przepisMapper;
+
+    @Autowired
+    private ZawieraDao zawieraDao;
+
+    @Autowired
+    private ProduktDao produktDao;
 
 
 
@@ -86,4 +91,37 @@ public class DanieSearchController {
         return new ResponseEntity<DanieDts>(danieDts,HttpStatus.OK);
     }
 
+    /**
+     * Metoda przyjmuje Obiekt JSON i zwraca go
+     */
+    //@CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping(value = "/send/test", method = RequestMethod.POST)
+    public ResponseEntity<ReqOb> getJSON(@RequestBody ReqOb reqOb) {
+        reqOb.setCena(23424);
+
+        return new ResponseEntity<ReqOb>(reqOb,HttpStatus.OK);
+    }
+
+    /**
+     * Metoda przyjmuje Obiekt JSON i zwraca go
+     */
+    //@CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping(value = "/send/test1", method = RequestMethod.POST)
+    public ResponseEntity<List<Danie>> getJSON1(@RequestBody ReqOb reqOb) {
+        reqOb.setCena(23424);
+        List<Danie> danieList = danieService.getDanieByTyp(reqOb.getNazwaTyp());
+
+        return new ResponseEntity<List<Danie>>(danieList,HttpStatus.OK);
+    }
+
+
+    /**
+     * Metoda przyjmuje Obiekt JSON i zwraca go
+     */
+    //@CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping(value = "/send/test2", method = RequestMethod.POST)
+    public ResponseEntity<List<AdvDanieDts>> getJSON2(@RequestBody ReqOb reqOb) {
+        List<AdvDanieDts> danieRez = danieService.getSortDanie(reqOb);
+        return new ResponseEntity<List<AdvDanieDts>>(danieRez,HttpStatus.OK);
+    }
 }

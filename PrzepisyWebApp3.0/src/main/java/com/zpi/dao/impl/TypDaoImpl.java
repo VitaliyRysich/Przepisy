@@ -40,4 +40,16 @@ public class TypDaoImpl implements TypDao {
         return typ;
     }
 
+    @Override
+    public List<Typ> getIdByNazwa(String nazwa) {
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery(" select t.idTyp from com.zpi.entity.Typ t where t.nazwaTyp like :nazwa");
+        query.setString("nazwa", "%"+nazwa+"%");
+        List list = query.list();
+        session.close();
+        return list;
+
+    }
+
+
 }

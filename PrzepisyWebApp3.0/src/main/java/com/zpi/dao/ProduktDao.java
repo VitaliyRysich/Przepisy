@@ -1,6 +1,5 @@
 package com.zpi.dao;
 
-import com.zpi.entity.Danie;
 import com.zpi.entity.Produkt;
 
 /**
@@ -8,4 +7,5 @@ import com.zpi.entity.Produkt;
  */
 public interface ProduktDao {
     Produkt getProduktById(long id);
+    Produkt getProduktByName(String name);
 }

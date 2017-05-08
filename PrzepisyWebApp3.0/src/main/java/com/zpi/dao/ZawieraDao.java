@@ -10,4 +10,6 @@ import java.util.List;
 public interface ZawieraDao {
     List<Zawiera> getAllZawiera();
     List<Zawiera> getAllZawieraByIdDanie(long id);
+    long getRezult(long idDanie, long idProdukt);
+    long getSumProd(long idDanie);
 }
