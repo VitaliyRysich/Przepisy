@@ -1,5 +1,6 @@
 package com.zpi.dts;
 
+import com.zpi.dto.ProduktDtoAdv;
 import com.zpi.entity.Danie;
 import com.zpi.entity.Produkt;
 
@@ -19,56 +20,25 @@ public class AdvDanieDts {
 
     private String ZdjecieDanie;
 
-    /*private String nazwaTyp;
+    private long czasPrzepis;
 
-    private String opisPrzepis;
-
-    private long czasPrzepis;*/
-
-
-    private List<Produkt> isIn = new ArrayList<>();
-    private List<Produkt> isNotIn = new ArrayList<>();
+    private List<ProduktDtoAdv> isIn = new ArrayList<>();
+    private List<ProduktDtoAdv> isNotIn = new ArrayList<>();
 
     private double ocena;
 
     private double sumaDoplaty;
+
+    private String nazwaTyp;
+
+    private String opisPrzepis;
+
     public AdvDanieDts(Danie danie) {
         this.IdDanie = danie.getIdDanie();
         this.NazwaDanie = danie.getNazwaDanie();
         this.OpisDanie = danie.getOpisDanie();
         this.ZdjecieDanie = danie.getZdjecieDanie();
 
-    }
-    public void addIsIn(Produkt produkt) {
-        isIn.add(produkt);
-    }
-
-    public void addIsNotIn(Produkt produkt) {
-        isNotIn.add(produkt);
-    }
-
-    public List<Produkt> getIsIn() {
-        return isIn;
-    }
-
-    public void setIsIn(List<Produkt> isIn) {
-        this.isIn = isIn;
-    }
-
-    public List<Produkt> getIsNotIn() {
-        return isNotIn;
-    }
-
-    public void setIsNotIn(List<Produkt> isNotIn) {
-        this.isNotIn = isNotIn;
-    }
-
-    public double getOcena() {
-        return ocena;
-    }
-
-    public void setOcena(double ocena) {
-        this.ocena = ocena;
     }
 
     public long getIdDanie() {
@@ -103,11 +73,59 @@ public class AdvDanieDts {
         ZdjecieDanie = zdjecieDanie;
     }
 
+    public long getCzasPrzepis() {
+        return czasPrzepis;
+    }
+
+    public void setCzasPrzepis(long czasPrzepis) {
+        this.czasPrzepis = czasPrzepis;
+    }
+
+    public List<ProduktDtoAdv> getIsIn() {
+        return isIn;
+    }
+
+    public void setIsIn(List<ProduktDtoAdv> isIn) {
+        this.isIn = isIn;
+    }
+
+    public List<ProduktDtoAdv> getIsNotIn() {
+        return isNotIn;
+    }
+
+    public void setIsNotIn(List<ProduktDtoAdv> isNotIn) {
+        this.isNotIn = isNotIn;
+    }
+
+    public double getOcena() {
+        return ocena;
+    }
+
+    public void setOcena(double ocena) {
+        this.ocena = ocena;
+    }
+
     public double getSumaDoplaty() {
         return sumaDoplaty;
     }
 
     public void setSumaDoplaty(double sumaDoplaty) {
         this.sumaDoplaty = sumaDoplaty;
+    }
+
+    public String getNazwaTyp() {
+        return nazwaTyp;
+    }
+
+    public void setNazwaTyp(String nazwaTyp) {
+        this.nazwaTyp = nazwaTyp;
+    }
+
+    public String getOpisPrzepis() {
+        return opisPrzepis;
+    }
+
+    public void setOpisPrzepis(String opisPrzepis) {
+        this.opisPrzepis = opisPrzepis;
     }
 }

@@ -2,11 +2,15 @@ package com.zpi.service.impl;
 
 import com.zpi.dao.DanieDao;
 import com.zpi.dao.ProduktDao;
+import com.zpi.dao.PrzepisDao;
 import com.zpi.dao.ZawieraDao;
+import com.zpi.dto.ProduktDtoAdv;
+import com.zpi.dto.PrzepisDto;
 import com.zpi.dto.ReqOb;
 import com.zpi.dts.AdvDanieDts;
 import com.zpi.entity.Danie;
 import com.zpi.entity.Produkt;
+import com.zpi.entity.Przepis;
 import com.zpi.entity.Zawiera;
 import com.zpi.service.DanieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +33,9 @@ public class DanieServiceImpl implements DanieService{
 
     @Autowired
     private ProduktDao produktDao;
+
+    @Autowired
+    private PrzepisDao przepisDao;
 
     @Override
     public List<Danie> getAllDanie() {
@@ -65,30 +72,55 @@ public class DanieServiceImpl implements DanieService{
         List<AdvDanieDts> advDanieDtsList = new ArrayList<>();
 
         for(Danie d: danieList) {
-            List<Produkt> tmpList = new ArrayList<>();
+            List<ProduktDtoAdv> tmpList = new ArrayList<>();
+            List<Zawiera> tmpZawiera;
+
+
+
             long tmpSize = zawieraDao.getSumProd(d.getIdDanie());
             String [] tmpArr = reqOb.getProdukty();
             long sizeProd =0;
             tmpList.clear();
             for(String str : tmpArr) {
+                ProduktDtoAdv produktDtoAdv = new ProduktDtoAdv();
                 Produkt tmpProd = produktDao.getProduktByName(str);
                 if(zawieraDao.getRezult(d.getIdDanie(),tmpProd.getIdProdukt()) == 1) {
                     sizeProd++;
-                    tmpList.add(tmpProd);
+                    tmpZawiera = zawieraDao.getAllZawieraByIdDanie(d.getIdDanie());
+                    produktDtoAdv.setCenaProdukt(tmpProd.getCenaProdukt());
+                    produktDtoAdv.setIdProdukt(tmpProd.getIdProdukt());
+                    produktDtoAdv.setIdRodzaj(tmpProd.getIdRodzaj());
+                    produktDtoAdv.setNazwaProdukt(tmpProd.getNazwaProdukt());
+                    for(Zawiera zw: tmpZawiera) {
+                        if(zw.getIdProdukt()== produktDtoAdv.getIdProdukt())
+                            produktDtoAdv.setIlosc(zw.getIlosc());
+                    }
+                    tmpList.add(produktDtoAdv);
                 }
             }
 
+            long idPrzepis = d.getIdPrzepis();
+            Przepis przepis = przepisDao.getPrzepisById(idPrzepis);
+
             double tmpd = (double)sizeProd/(double)tmpSize;
-            System.out.println(tmpd);
+            danieRez.add(d);
+            AdvDanieDts advDanieDts = new AdvDanieDts(d);
+            advDanieDts.setIsIn(tmpList);
+            advDanieDts.setOcena(tmpd);
+            advDanieDts.setCzasPrzepis(przepis.getCzasPrzepis());
+            advDanieDts.setOpisPrzepis(przepis.getOpisPrzepis());
+            advDanieDts.setNazwaTyp(reqOb.getNazwaTyp());
+            advDanieDtsList.add(advDanieDts);
+
+
+
+            /*System.out.println(tmpd);
             if(tmpd >= 0.5) {
-                danieRez.add(d);
-                AdvDanieDts advDanieDts = new AdvDanieDts(d);
-                advDanieDts.setIsIn(tmpList);
-                advDanieDts.setOcena(tmpd);
-                advDanieDtsList.add(advDanieDts);
-            }
+
+            }*/
         }
         for(AdvDanieDts ad: advDanieDtsList) {
+            //ad.setIsNotIn(getIsNotInProdukt());
             ad.setIsNotIn(getIsNotInProdukt(getAllProdukt(ad.getIdDanie()),ad.getIsIn()));
         }
 
@@ -102,42 +134,62 @@ public class DanieServiceImpl implements DanieService{
         return advDanieDtsList;
     }
 
-    public List<Produkt> getAllProdukt(long idDania) {
+    /*public List<Long> getIlosc(long idDanie) {
+        List<Zawiera> tmpZawiera = new ArrayList<>();
+        tmpZawiera = zawieraDao.getAllZawieraByIdDanie(idDanie);
+        List<Long> ls = new ArrayList<>();
+        for(Zawiera zw: tmpZawiera){
+            System.out.println(zw.getIdProdukt());
+            ls.add(zw.getIdProdukt());
+        }
+        return ls;
+    }*/
+
+    public List<ProduktDtoAdv> getAllProdukt(long idDania) {
 
         List<Zawiera> zawieraList = new ArrayList<>();
-        List<Produkt> produktList = new ArrayList<>();
+        List<ProduktDtoAdv> produktList = new ArrayList<>();
         zawieraList = zawieraDao.getAllZawieraByIdDanie(idDania);
         for(Zawiera z:zawieraList) {
-            produktList.add(produktDao.getProduktById(z.getIdProdukt()));
+            Produkt tmpProd = produktDao.getProduktById(z.getIdProdukt());
+            ProduktDtoAdv produktDtoAdv = new ProduktDtoAdv();
+            produktDtoAdv.setCenaProdukt(tmpProd.getCenaProdukt());
+            produktDtoAdv.setIdProdukt(tmpProd.getIdProdukt());
+            produktDtoAdv.setIdRodzaj(tmpProd.getIdRodzaj());
+            produktDtoAdv.setNazwaProdukt(tmpProd.getNazwaProdukt());
+            if(z.getIdProdukt()== produktDtoAdv.getIdProdukt())
+                produktDtoAdv.setIlosc(z.getIlosc());
+            //produktDtoAdv.setIlosc(z.getIlosc());
+            produktList.add(produktDtoAdv);
         }
 
         return produktList;
     }
 
-    public List<Produkt> getIsNotInProdukt(List<Produkt> allProduktList, List<Produkt> isInReq) {
-        List<Produkt> rezList = new ArrayList<>();
-        List<Produkt> tmp = new ArrayList<>();
+    public List<ProduktDtoAdv> getIsNotInProdukt(List<ProduktDtoAdv> allProduktList, List<ProduktDtoAdv> isInReq) {
+        List<ProduktDtoAdv> rezList = new ArrayList<>();
+        List<ProduktDtoAdv> tmp = new ArrayList<>();
         rezList.addAll(allProduktList);
 
 
         System.out.println(rezList.toString());
-        for(Produkt p2:rezList) {
-            for(Produkt p1:isInReq) {
+        for(ProduktDtoAdv p2:rezList) {
+            for(ProduktDtoAdv p1:isInReq) {
                 if(p2.getIdProdukt()==p1.getIdProdukt())
                     tmp.add(p2);
             }
         }
 
         rezList.removeAll(tmp);
-        System.out.println("====================");
-        System.out.println(rezList.toString());
+        //System.out.println("====================");
+        //System.out.println(rezList.toString());
 
         return rezList;
     }
 
-    public double sumaDoplaty(List<Produkt> list) {
+    public double sumaDoplaty(List<ProduktDtoAdv> list) {
         double tmpOcena=0;
-        for (Produkt p: list) {
+        for (ProduktDtoAdv p: list) {
             tmpOcena += p.getCenaProdukt();
         }
         return tmpOcena;
@@ -153,4 +205,6 @@ public class DanieServiceImpl implements DanieService{
         list.removeAll(tmp);
         return list;
     }
+
+
 }

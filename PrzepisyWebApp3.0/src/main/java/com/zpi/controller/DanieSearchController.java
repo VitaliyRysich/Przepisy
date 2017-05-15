@@ -105,7 +105,7 @@ public class DanieSearchController {
     /**
      * Metoda przyjmuje Obiekt JSON i zwraca go
      */
-    //@CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(value = "/send/test1", method = RequestMethod.POST)
     public ResponseEntity<List<Danie>> getJSON1(@RequestBody ReqOb reqOb) {
         reqOb.setCena(23424);
@@ -118,7 +118,7 @@ public class DanieSearchController {
     /**
      * Metoda przyjmuje Obiekt JSON i zwraca go
      */
-    //@CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(value = "/send/test2", method = RequestMethod.POST)
     public ResponseEntity<List<AdvDanieDts>> getJSON2(@RequestBody ReqOb reqOb) {
         List<AdvDanieDts> danieRez = danieService.getSortDanie(reqOb);
