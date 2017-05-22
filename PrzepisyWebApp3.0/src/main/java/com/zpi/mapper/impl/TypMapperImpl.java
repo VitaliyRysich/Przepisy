@@ -16,13 +16,14 @@ import java.util.List;
 @Service
 public class TypMapperImpl implements TypMapper{
 
-    @Autowired
-    private TypDto typDto;
+    //@Autowired
+    //private TypDto typDto;
 
     @Override
     public TypDto toTypDto(Typ typ) {
-        this.typDto.setIdTyp(typ.getIdTyp());
-        this.typDto.setNazwaTyp(typ.getNazwaTyp());
+        TypDto typDto = new TypDto();
+        typDto.setIdTyp(typ.getIdTyp());
+        typDto.setNazwaTyp(typ.getNazwaTyp());
         return typDto;
     }
 
