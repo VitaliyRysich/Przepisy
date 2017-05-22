@@ -27,4 +27,15 @@ public class PrzepisDaoImpl implements PrzepisDao {
         session.close();
         return przepis;
     }
+
+    @Override
+    public void insertPrzepis(String opisPrzepis, long czasPrzepis) {
+        Session session =sessionFactory.openSession();
+        Przepis przepis = new Przepis("opis",12);
+        session.save(przepis);
+        //Query query=session.createQuery("insert into com.zpi.entity.Przepis(opisPrzepis, czasPrzepis) 'asd',12");
+        //query.setLong("id",id);
+        //Przepis przepis = (Przepis) query.uniqueResult();
+        session.close();
+    }
 }

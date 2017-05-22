@@ -3,10 +3,7 @@ package com.zpi.controller;
 import com.zpi.assembler.DanieAssembler;
 import com.zpi.dao.ProduktDao;
 import com.zpi.dao.ZawieraDao;
-import com.zpi.dto.DanieDto;
-import com.zpi.dto.PrzepisDto;
-import com.zpi.dto.ReqOb;
-import com.zpi.dto.TypDto;
+import com.zpi.dto.*;
 import com.zpi.dts.AdvDanieDts;
 import com.zpi.dts.DanieDts;
 import com.zpi.entity.Danie;
@@ -123,5 +120,18 @@ public class DanieSearchController {
     public ResponseEntity<List<AdvDanieDts>> getJSON2(@RequestBody ReqOb reqOb) {
         List<AdvDanieDts> danieRez = danieService.getSortDanie(reqOb);
         return new ResponseEntity<List<AdvDanieDts>>(danieRez,HttpStatus.OK);
+    }
+
+
+    /**
+     *
+     */
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping(value = "/send/test3", method = RequestMethod.POST)
+    public ResponseEntity<List<AdvDanieDts>> newRecord(@RequestBody NewDBRecords newDBRecords) {
+
+        //List<AdvDanieDts> danieRez = danieService.getSortDanie(reqOb);
+        //return new ResponseEntity<List<AdvDanieDts>>(danieRez,HttpStatus.OK);
+        return null;
     }
 }

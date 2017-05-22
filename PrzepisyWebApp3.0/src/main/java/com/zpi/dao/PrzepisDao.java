@@ -9,4 +9,5 @@ import com.zpi.entity.Typ;
 public interface PrzepisDao {
 
     Przepis getPrzepisById(long id);
+    void insertPrzepis(String opisPrzepis, long czasPrzepis);
 }

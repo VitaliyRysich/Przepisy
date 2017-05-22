@@ -23,6 +23,13 @@ public class Przepis {
     @NotNull
     private long czasPrzepis;
 
+    public Przepis() {}
+
+    public Przepis(String opisPrzepis, long czasPrzepis) {
+        this.opisPrzepis = opisPrzepis;
+        this.czasPrzepis = czasPrzepis;
+    }
+
     public long getIdPrzepis() {
         return idPrzepis;
     }

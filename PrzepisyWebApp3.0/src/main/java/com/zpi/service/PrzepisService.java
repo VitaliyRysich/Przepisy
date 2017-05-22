@@ -1,5 +1,6 @@
 package com.zpi.service;
 
+import com.zpi.dto.NewDBRecords;
 import com.zpi.entity.Przepis;
 
 /**
@@ -8,4 +9,5 @@ import com.zpi.entity.Przepis;
 public interface PrzepisService {
 
     Przepis getPrzepisById(long id);
+    void insertPrzepis(NewDBRecords newDBRecords);
 }

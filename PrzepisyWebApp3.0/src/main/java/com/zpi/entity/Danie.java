@@ -38,6 +38,8 @@ public class Danie {
     @NotNull
     private long IdPrzepis;
 
+
+
 /*    @ManyToMany(cascade=CascadeType.ALL)
     @JoinTable(name = "produkt_danie", joinColumns = { @JoinColumn(name = "id_danie") }, inverseJoinColumns = { @JoinColumn(name = "id_produkt") })
     private Set<Produkt> produktList;*/
