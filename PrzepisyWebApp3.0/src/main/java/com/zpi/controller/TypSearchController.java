@@ -1,8 +1,7 @@
 package com.zpi.controller;
 
-import com.zpi.dto.DanieDto;
+import com.zpi.dao.TypDao;
 import com.zpi.dto.TypDto;
-import com.zpi.entity.Danie;
 import com.zpi.entity.Typ;
 import com.zpi.mapper.TypMapper;
 import com.zpi.service.TypService;
@@ -26,6 +25,9 @@ public class TypSearchController {
     private TypService typService;
     @Autowired
     private TypMapper typMapper;
+
+    @Autowired
+    private TypDao typDao;
 
     @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(value = "/getTyp-all",method = RequestMethod.GET)
@@ -53,11 +55,40 @@ public class TypSearchController {
     @CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(value = "/typName/{name}", method = RequestMethod.GET)
     public ResponseEntity<List<Typ>> getDanieByName(@PathVariable("name") String name) {
-        List<Typ> list = typService.getIdByNazwa(name);
+        List<Typ> list = typService.getTypByNazwa(name);
         return new ResponseEntity<List<Typ>>(list,HttpStatus.OK);
         //List<Danie> listDanieName = danieService.getDanieByName(name);
         //List<DanieDto> listDanieDto = danieMapper.toDanieDtoList(listDanieName);
         //return new ResponseEntity<List<DanieDto>>(listDanieDto, HttpStatus.OK);
+    }
+
+    /**
+     *Zwraca ID według nazwy
+     *
+     */
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping(value = "/IdtypName/{name}", method = RequestMethod.GET)
+    public ResponseEntity<Long> getIdByName(@PathVariable("name") String name) {
+        Long id = typService.getIdByNazwa(name);
+        //List<Typ> list = typService.getTypByNazwa(name);
+        return new ResponseEntity<Long>(id,HttpStatus.OK);
+        //List<Danie> listDanieName = danieService.getDanieByName(name);
+        //List<DanieDto> listDanieDto = danieMapper.toDanieDtoList(listDanieName);
+        //return new ResponseEntity<List<DanieDto>>(listDanieDto, HttpStatus.OK);
+    }
+
+
+    /**
+     *Zwraca ID insertu typu
+     *
+     */
+    @CrossOrigin(origins = "http://localhost:3000")
+    @RequestMapping(value = "/setTyp", method = RequestMethod.GET)
+    public ResponseEntity<Long> setTyp() {
+        long id = typDao.seTyp(35,"Name2");
+        //List<Typ> list = typService.getTypByNazwa(name);
+        //return new ResponseEntity<Long>(id,HttpStatus.OK);
+        return new ResponseEntity<Long>(id,HttpStatus.OK);
     }
 
 

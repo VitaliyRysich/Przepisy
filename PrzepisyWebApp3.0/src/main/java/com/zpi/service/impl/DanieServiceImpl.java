@@ -134,7 +134,7 @@ public class DanieServiceImpl implements DanieService{
         return advDanieDtsList;
     }
 
-    /*public List<Long> getIlosc(long idDanie) {
+    /*public List<Long> getIloscProdukt(long idDanie) {
         List<Zawiera> tmpZawiera = new ArrayList<>();
         tmpZawiera = zawieraDao.getAllZawieraByIdDanie(idDanie);
         List<Long> ls = new ArrayList<>();
@@ -159,7 +159,7 @@ public class DanieServiceImpl implements DanieService{
             produktDtoAdv.setNazwaProdukt(tmpProd.getNazwaProdukt());
             if(z.getIdProdukt()== produktDtoAdv.getIdProdukt())
                 produktDtoAdv.setIlosc(z.getIlosc());
-            //produktDtoAdv.setIlosc(z.getIlosc());
+            //produktDtoAdv.setIloscProdukt(z.getIloscProdukt());
             produktList.add(produktDtoAdv);
         }
 

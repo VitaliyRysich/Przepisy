@@ -2,6 +2,7 @@ package com.zpi.dao.impl;
 
 import com.zpi.dao.ProduktDao;
 import com.zpi.entity.Produkt;
+import com.zpi.entity.Typ;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -47,6 +48,18 @@ public class ProduktDaoImpl implements ProduktDao {
         List list=query.list();
         session.close();
         return list;
+    }
+
+    @Override
+    public Long getIdByNazwa(String nazwa) {
+        Session session = sessionFactory.openSession();
+        Query query = session.createQuery("from com.zpi.entity.Produkt t where t.nazwaProdukt like :nazwa");
+        query.setString("nazwa", "%"+nazwa+"%");
+        List<Produkt> list = query.list();
+        //Typ tmpTyp = (Typ) query.uniqueResult();
+        Produkt tmpTyp = list.get(0);
+        session.close();
+        return tmpTyp.getIdProdukt();
     }
 
 

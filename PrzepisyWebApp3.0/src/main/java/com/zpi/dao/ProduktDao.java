@@ -11,4 +11,5 @@ public interface ProduktDao {
     Produkt getProduktById(long id);
     Produkt getProduktByName(String name);
     List<Produkt> getProduktsByRodzaj(long id);
+    Long getIdByNazwa(String nazwa);
  }

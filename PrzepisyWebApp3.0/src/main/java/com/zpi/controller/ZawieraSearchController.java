@@ -42,7 +42,7 @@ public class ZawieraSearchController {
      *
      *  TMP Controller
      * */
-    @CrossOrigin(origins = "http://localhost:3000")
+    //@CrossOrigin(origins = "http://localhost:3000")
     @RequestMapping(value = "/zawiera/{id1}/{id2}",method = RequestMethod.GET)
     public ResponseEntity<Long> getAllZawiera(@PathVariable("id1") long id1, @PathVariable("id2") long id2) {
         long rez = zawieraDao.getRezult(id1,id2);

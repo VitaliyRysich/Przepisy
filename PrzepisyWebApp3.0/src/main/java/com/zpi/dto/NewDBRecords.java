@@ -7,40 +7,42 @@ import java.util.List;
  * Created by Vitalii on 22.05.2017.
  */
 public class NewDBRecords {
+
+
+    private long nazwaTyp;  // It's IdTyp
+    private String opisPrzepis;
+    private long czasPrzepis;
+
     private String nazwaDanie;
     private String OpisDanie;
     private String ZdjecieDanie;
-    private long idTyp;
+    List<ProduktNazwaIlosc> produkty = new ArrayList<>();
 
-    List<ProduktNazwaIlosc> produktNazwaIloscList = new ArrayList<>();
-
-    private String opisPrzepis;
-    private long czasPrzepis;
 
     public NewDBRecords(){}
     public NewDBRecords(String nazwaDanie,
                         String opisDanie,
                         String zdjecieDanie,
-                        List<ProduktNazwaIlosc> produktNazwaIloscList,
+                        List<ProduktNazwaIlosc> produkty,
                         String opisPrzepis,
                         long czasPrzepis,
-                        long idTyp
+                        long nazwaTyp
                         ) {
         this.nazwaDanie = nazwaDanie;
         OpisDanie = opisDanie;
         ZdjecieDanie = zdjecieDanie;
-        this.produktNazwaIloscList = produktNazwaIloscList;
+        this.produkty = produkty;
         this.opisPrzepis = opisPrzepis;
         this.czasPrzepis = czasPrzepis;
-        this.idTyp = idTyp;
+        this.nazwaTyp = nazwaTyp;
     }
 
-    public long getIdTyp() {
-        return idTyp;
+    public long getNazwaTyp() {
+        return nazwaTyp;
     }
 
-    public void setIdTyp(long idTyp) {
-        this.idTyp = idTyp;
+    public void setNazwaTyp(long nazwaTyp) {
+        this.nazwaTyp = nazwaTyp;
     }
 
     public String getNazwaDanie() {
@@ -67,12 +69,12 @@ public class NewDBRecords {
         ZdjecieDanie = zdjecieDanie;
     }
 
-    public List<ProduktNazwaIlosc> getProduktNazwaIloscList() {
-        return produktNazwaIloscList;
+    public List<ProduktNazwaIlosc> getProdukty() {
+        return produkty;
     }
 
-    public void setProduktNazwaIloscList(List<ProduktNazwaIlosc> produktNazwaIloscList) {
-        this.produktNazwaIloscList = produktNazwaIloscList;
+    public void setProdukty(List<ProduktNazwaIlosc> produkty) {
+        this.produkty = produkty;
     }
 
     public String getOpisPrzepis() {

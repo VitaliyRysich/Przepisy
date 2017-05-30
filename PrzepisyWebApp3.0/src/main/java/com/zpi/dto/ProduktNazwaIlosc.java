@@ -5,7 +5,7 @@ package com.zpi.dto;
  */
 public class ProduktNazwaIlosc {
     private String nazwaProdukt;
-    private String ilosc;
+    private String iloscProdukt;
 
     public String getNazwaProdukt() {
         return nazwaProdukt;
@@ -15,11 +15,11 @@ public class ProduktNazwaIlosc {
         this.nazwaProdukt = nazwaProdukt;
     }
 
-    public String getIlosc() {
-        return ilosc;
+    public String getIloscProdukt() {
+        return iloscProdukt;
     }
 
-    public void setIlosc(String ilosc) {
-        this.ilosc = ilosc;
+    public void setIloscProdukt(String iloscProdukt) {
+        this.iloscProdukt = iloscProdukt;
     }
 }

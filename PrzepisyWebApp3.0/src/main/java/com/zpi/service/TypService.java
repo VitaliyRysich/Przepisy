@@ -12,5 +12,6 @@ public interface TypService {
 
     List<Typ> getAllTyp();
     Typ getTypById(long id);
-    List<Typ> getIdByNazwa(String nazwa);
+    List<Typ> getTypByNazwa(String nazwa);
+    Long getIdByNazwa(String nazwa);
 }

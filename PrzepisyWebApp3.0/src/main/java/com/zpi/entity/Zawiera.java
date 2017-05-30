@@ -22,6 +22,14 @@ public class Zawiera {
     @Column(name = "ilosc")
     private String ilosc;
 
+    public Zawiera() {}
+
+    public Zawiera(long idDanie, long idProdukt, String ilosc) {
+        this.idDanie = idDanie;
+        this.idProdukt = idProdukt;
+        this.ilosc = ilosc;
+    }
+
     public long getIdDanie() {
         return idDanie;
     }
