@@ -5,12 +5,13 @@ import com.zpi.entity.Danie;
 import com.zpi.entity.Produkt;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
  * Created by dima on 07/05/17.
  */
-public class AdvDanieDts {
+public class AdvDanieDts implements Comparable<AdvDanieDts>{
 
     private long IdDanie;
 
@@ -128,4 +129,17 @@ public class AdvDanieDts {
     public void setOpisPrzepis(String opisPrzepis) {
         this.opisPrzepis = opisPrzepis;
     }
+
+    @Override
+    public int compareTo(AdvDanieDts o) {
+        return (int)(this.ocena*100-o.getOcena()*100);
+    }
+
+    public static Comparator<AdvDanieDts> ocenaComparator = new Comparator<AdvDanieDts>(){
+
+        @Override
+        public int compare(AdvDanieDts o1, AdvDanieDts o2) {
+            return (int)(o2.getOcena()*100-o1.getOcena()*100);
+        }
+    };
 }

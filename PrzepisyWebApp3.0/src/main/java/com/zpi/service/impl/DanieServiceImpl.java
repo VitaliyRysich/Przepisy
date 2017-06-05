@@ -75,8 +75,6 @@ public class DanieServiceImpl implements DanieService{
             List<ProduktDtoAdv> tmpList = new ArrayList<>();
             List<Zawiera> tmpZawiera;
 
-
-
             long tmpSize = zawieraDao.getSumProd(d.getIdDanie());
             String [] tmpArr = reqOb.getProdukty();
             long sizeProd =0;
@@ -130,7 +128,7 @@ public class DanieServiceImpl implements DanieService{
 
         advDanieDtsList=removeByCena(advDanieDtsList, reqOb.getCena());
 
-
+        advDanieDtsList.sort(AdvDanieDts.ocenaComparator);
         return advDanieDtsList;
     }
 
